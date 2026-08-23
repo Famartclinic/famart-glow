@@ -30,7 +30,7 @@ export function Footer() {
                 key={label}
                 href="#"
                 aria-label={`${SITE.shortName} on ${label}`}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-muted-foreground transition-colors hover:border-primary hover:text[...]
               >
                 <Icon className="size-4" />
               </a>
@@ -107,7 +107,11 @@ export function Footer() {
               <span>
                 Working Hours
                 <br />
-                Monday – Friday
+                Monday – Saturday
+                <br />
+                8:00 AM – 8:00 PM
+                <br />
+                Sunday
                 <br />
                 9:00 AM – 5:00 PM
               </span>
