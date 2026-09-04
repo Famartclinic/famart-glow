@@ -1,2 +1,23 @@
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
 User-agent: *
 Allow: /
+Allow: /sitemap.xml
+Allow: /about
+Allow: /services
+Allow: /shop
+Allow: /contact
+Allow: /book
+Allow: /cart
+
+Sitemap: https://famartclinic.co.ke/sitemap.xml
