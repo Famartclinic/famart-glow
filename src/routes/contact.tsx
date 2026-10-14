@@ -13,7 +13,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Visit Famart Healthcare Medical and Skin Clinic at Pipeline opposite Honeysuckle gardens estate, Nairobi. Call +254708 931 682/ +254747 077 433. Open Monday to Friday, 9:00 AM to 5:00 PM.",
+          "Contact Famart Healthcare Medical and Skin Clinic in Nairobi Pipeline. Call or WhatsApp +254708 931 682 / +254747 077 433. Open Monday to Friday.",
       },
       { property: "og:title", content: "Contact Famart Healthcare Medical and Skin Clinic" },
       {

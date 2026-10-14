@@ -21,7 +21,7 @@ import { SITE, waLink } from "@/lib/site";
 
 const TITLE = "Shop Premium Skincare Products | Famart Healthcare";
 const DESCRIPTION =
-  "Shop skincare products from Famart Healthcare Medical and Skin Clinic in Nairobi. Browse cleansers, moisturisers, sunscreens, acne care and serums, and order conveniently through WhatsApp.";
+  "Shop skincare at Famart Healthcare Nairobi. Browse cleansers, moisturisers, sunscreens, acne care and serums, then order easily via WhatsApp.";
 
 export const Route = createFileRoute("/shop/")({
   component: ShopPage,

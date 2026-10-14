@@ -20,7 +20,7 @@ export const Route = createFileRoute("/services/")({
       {
         name: "description",
         content:
-          "Explore Famart Healthcare's dermatology services in Nairobi Pipeline: acne treatment, eczema management, psoriasis care, skin allergies, fungal infections, pigmentation, mole assessment and more.",
+          "Dermatology services in Nairobi Pipeline: acne, eczema, psoriasis, pigmentation, fungal infections, mole checks and laser skin treatments at Famart.",
       },
       { property: "og:title", content: "Dermatology Services in Nairobi | Famart Healthcare" },
       {
