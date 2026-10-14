@@ -7,20 +7,27 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { Icon } from "@/components/Icon";
 import { Reveal } from "@/components/Reveal";
-import { SectionHeading } from "@/components/sections";
+import { SectionHeading, ServiceCard, ServiceMedia } from "@/components/sections";
+import { ServiceImagesProvider } from "@/lib/service-images";
 import { SITE, serviceDetails, services, telLink, waLink } from "@/lib/site";
-import type { ServiceDetail } from "@/lib/site";
+import type { Service, ServiceDetail } from "@/lib/site";
 
 const findService = (slug: string) => services.find((s) => s.slug === slug);
 
 export const Route = createFileRoute("/services/$slug")({
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
     const service = findService(params.slug);
     const detail = serviceDetails[params.slug];
     if (!service || !detail) throw notFound();
-    return { service, detail };
+    let serviceImages: Record<string, string> = {};
+    try {
+      const { getServiceImages } = await import("@/lib/service-images.functions");
+      serviceImages = await getServiceImages();
+    } catch {
+      /* keep static images as fallback */
+    }
+    return { service, detail, serviceImages };
   },
   head: ({ params, loaderData }) => {
     if (!loaderData) {
@@ -35,6 +42,12 @@ export const Route = createFileRoute("/services/$slug")({
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
+        ...(service.image
+          ? [
+              { property: "og:image", content: service.image },
+              { name: "twitter:image", content: service.image },
+            ]
+          : []),
         { property: "og:url", content: `/services/${params.slug}` },
         { property: "og:type", content: "article" },
         { name: "twitter:title", content: title },
@@ -49,6 +62,7 @@ export const Route = createFileRoute("/services/$slug")({
             "@type": "MedicalProcedure",
             name: service.name,
             description: service.desc,
+            ...(service.image ? { image: service.image } : {}),
             provider: {
               "@type": "MedicalClinic",
               name: SITE.name,
@@ -108,17 +122,19 @@ function ServiceNotFound() {
 }
 
 function ServiceDetailPage() {
-  const { service, detail } = Route.useLoaderData() as {
-    service: (typeof services)[number];
+  const { service, detail, serviceImages } = Route.useLoaderData() as {
+    service: Service;
     detail: ServiceDetail;
+    serviceImages: Record<string, string>;
   };
   const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
 
   return (
-    <>
+    <ServiceImagesProvider images={serviceImages}>
+      <>
       <section className="gradient-soft">
-        <div className="mx-auto max-w-7xl px-5 py-16 lg:py-20">
-          <Reveal className="max-w-3xl">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[1.05fr_1fr] lg:py-20">
+          <Reveal>
             <nav aria-label="Breadcrumb" className="text-xs text-muted-foreground">
               <Link to="/" className="hover:text-primary">
                 Home
@@ -130,9 +146,6 @@ function ServiceDetailPage() {
               <span className="mx-2">/</span>
               <span className="text-foreground">{service.name}</span>
             </nav>
-            <span className="mt-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl gradient-brand text-primary-foreground">
-              <Icon name={service.icon} className="size-5" />
-            </span>
             <h1 className="mt-5 text-4xl font-bold text-balance sm:text-5xl">{detail.headline}</h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">{detail.intro}</p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -153,6 +166,12 @@ function ServiceDetailPage() {
                 </a>
               </Button>
             </div>
+          </Reveal>
+
+          <Reveal delay={140}>
+            <figure className="group relative overflow-hidden rounded-[2rem] border bg-card shadow-lift">
+              <ServiceMedia service={service} badge="lg" className="aspect-[4/3]" />
+            </figure>
           </Reveal>
         </div>
       </section>
@@ -223,21 +242,12 @@ function ServiceDetailPage() {
         <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {related.map((s, i) => (
             <Reveal as="li" key={s.slug} delay={(i % 3) * 90}>
-              <Link
-                to="/services/$slug"
-                params={{ slug: s.slug }}
-                className="group flex h-full flex-col rounded-3xl border bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-lift"
-              >
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-accent text-primary">
-                  <Icon name={s.icon} className="size-5" />
-                </span>
-                <h3 className="mt-4 font-display text-base font-semibold">{s.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-              </Link>
+              <ServiceCard service={s} />
             </Reveal>
           ))}
         </ul>
       </section>
-    </>
+      </>
+    </ServiceImagesProvider>
   );
 }

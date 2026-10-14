@@ -1,10 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CtaBand, Faqs, SectionHeading, ServicesGrid } from "@/components/sections";
 import { Reveal } from "@/components/Reveal";
+import { ServiceImagesProvider } from "@/lib/service-images";
 import { services, SITE } from "@/lib/site";
 
 export const Route = createFileRoute("/services/")({
   component: Services,
+  loader: async () => {
+    try {
+      const { getServiceImages } = await import("@/lib/service-images.functions");
+      return { serviceImages: await getServiceImages() };
+    } catch {
+      return { serviceImages: {} };
+    }
+  },
   head: () => ({
     meta: [
       { title: "Dermatology Services in Nairobi | Acne, Eczema & Skin Care | Famart" },
@@ -42,6 +51,7 @@ export const Route = createFileRoute("/services/")({
               "@type": "MedicalProcedure",
               name: s.name,
               description: s.desc,
+              ...(s.image ? { image: s.image } : {}),
               provider: { "@type": "MedicalClinic", name: SITE.name },
             },
           })),
@@ -52,8 +62,10 @@ export const Route = createFileRoute("/services/")({
 });
 
 function Services() {
+  const { serviceImages } = Route.useLoaderData();
   return (
-    <>
+    <ServiceImagesProvider images={serviceImages}>
+      <>
       <section className="gradient-soft">
         <div className="mx-auto max-w-7xl px-5 py-16 lg:py-24">
           <Reveal className="max-w-3xl">
@@ -91,6 +103,7 @@ function Services() {
       <section className="mx-auto max-w-7xl px-5 py-20">
         <CtaBand />
       </section>
-    </>
+      </>
+    </ServiceImagesProvider>
   );
 }

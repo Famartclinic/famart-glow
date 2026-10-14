@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { LayoutDashboard, LogOut, Package, Plus, Store } from "lucide-react";
+import { Images, LayoutDashboard, LogOut, Package, Plus, Store } from "lucide-react";
 import { toast } from "sonner";
 import { AdminOverview } from "@/components/admin/AdminOverview";
 import { AdminProductForm } from "@/components/admin/AdminProductForm";
 import { AdminProductsList } from "@/components/admin/AdminProductsList";
+import { AdminServiceImages } from "@/components/admin/AdminServiceImages";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,13 +33,15 @@ type AdminView =
   | { page: "overview" }
   | { page: "add" }
   | { page: "products" }
-  | { page: "edit"; slug: string };
+  | { page: "edit"; slug: string }
+  | { page: "service-images" };
 
 /** Extensible admin navigation — add entries here as the panel grows. */
 const NAV = [
   { id: "overview" as const, label: "Overview", icon: LayoutDashboard },
   { id: "add" as const, label: "Add Product", icon: Plus },
   { id: "products" as const, label: "Manage Products", icon: Package },
+  { id: "service-images" as const, label: "Service Images", icon: Images },
 ];
 
 function AdminPage() {
@@ -157,7 +160,8 @@ function AdminShell({ onSignOut }: { onSignOut: () => void }) {
   const goTo = (id: (typeof NAV)[number]["id"]) => {
     if (id === "overview") setView({ page: "overview" });
     else if (id === "add") setView({ page: "add" });
-    else setView({ page: "products" });
+    else if (id === "products") setView({ page: "products" });
+    else if (id === "service-images") setView({ page: "service-images" });
   };
 
   return (
@@ -243,6 +247,7 @@ function AdminShell({ onSignOut }: { onSignOut: () => void }) {
               onAdd={() => setView({ page: "add" })}
             />
           )}
+          {view.page === "service-images" && <AdminServiceImages />}
           {view.page === "edit" && (
             <AdminProductForm
               slug={view.slug}

@@ -104,6 +104,24 @@ export type Database = {
         }
         Relationships: []
       }
+      service_images: {
+        Row: {
+          slug: string
+          url: string
+          updated_at: string
+        }
+        Insert: {
+          slug: string
+          url: string
+          updated_at?: string
+        }
+        Update: {
+          slug?: string
+          url?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

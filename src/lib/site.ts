@@ -77,9 +77,31 @@ export const telLinkAlt = `tel:${SITE.phoneAlt}`;
 
 export const mapsLink = `https://www.google.com/maps/search/?api=1&query=${SITE.mapsQuery}`;
 
-export const services = [
+export type Service = {
+  slug: string;
+  name: string;
+  icon: string;
+  desc: string;
+  /**
+   * Photo served from `public/images/services`. Omit it and the service falls
+   * back to on-brand artwork, so the site stays complete while photos are added.
+   */
+  image?: string;
+  /** Describes the photo for screen readers and search engines. */
+  imageAlt?: string;
+};
+
+export const services: Service[] = [
   { slug: "acne-treatment", name: "Acne Treatment", icon: "Sparkles", desc: "Targeted medical therapy for acne, breakouts and post-acne scarring." },
-  { slug: "eczema-management", name: "Eczema Management", icon: "Droplets", desc: "Long-term relief plans for dry, itchy and inflamed eczema-prone skin." },
+  {
+    slug: "eczema-management",
+    name: "Eczema Management",
+    icon: "Droplets",
+    desc: "Long-term relief plans for dry, itchy and inflamed eczema-prone skin.",
+    image: "/images/services/eczema-management.jpg",
+    imageAlt:
+      "Close-up of thickened, hyperpigmented eczema skin on a patient's leg before treatment at Famart Healthcare.",
+  },
   { slug: "psoriasis-treatment", name: "Psoriasis Treatment", icon: "ShieldPlus", desc: "Evidence-based control of plaques, flares and scalp psoriasis." },
   { slug: "skin-allergy-treatment", name: "Skin Allergy Treatment", icon: "AlertCircle", desc: "Identify triggers and calm hives, contact dermatitis and reactions." },
   { slug: "fungal-skin-infections", name: "Fungal Skin Infections", icon: "Bug", desc: "Accurate diagnosis and treatment of ringworm, tinea and yeast infections." },
@@ -101,7 +123,7 @@ export const services = [
   { slug: "keloid-treatment", name: "Keloid & Scar Treatment", icon: "Bandage", desc: "Flatten and calm keloids and hypertrophic scars with clinical therapy." },
   { slug: "cracked-feet-treatment", name: "Cracked Feet Treatment", icon: "Footprints", desc: "Heal painful heel fissures and cracked feet with a medical foot-care plan." },
   { slug: "laser-services", name: "Laser Services", icon: "Zap", desc: "In-clinic laser treatment for skin tags, stretch marks, scars and more." },
-] as const;
+];
 
 export const whyChooseUs = [
   { icon: "Award", title: "Experienced Professionals", desc: "A clinical team with deep experience in skin health." },
