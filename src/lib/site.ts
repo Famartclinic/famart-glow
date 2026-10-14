@@ -77,9 +77,31 @@ export const telLinkAlt = `tel:${SITE.phoneAlt}`;
 
 export const mapsLink = `https://www.google.com/maps/search/?api=1&query=${SITE.mapsQuery}`;
 
-export const services = [
+export type Service = {
+  slug: string;
+  name: string;
+  icon: string;
+  desc: string;
+  /**
+   * Photo served from `public/images/services`. Omit it and the service falls
+   * back to on-brand artwork, so the site stays complete while photos are added.
+   */
+  image?: string;
+  /** Describes the photo for screen readers and search engines. */
+  imageAlt?: string;
+};
+
+export const services: Service[] = [
   { slug: "acne-treatment", name: "Acne Treatment", icon: "Sparkles", desc: "Targeted medical therapy for acne, breakouts and post-acne scarring." },
-  { slug: "eczema-management", name: "Eczema Management", icon: "Droplets", desc: "Long-term relief plans for dry, itchy and inflamed eczema-prone skin." },
+  {
+    slug: "eczema-management",
+    name: "Eczema Management",
+    icon: "Droplets",
+    desc: "Long-term relief plans for dry, itchy and inflamed eczema-prone skin.",
+    image: "/images/services/eczema-management.jpg",
+    imageAlt:
+      "Close-up of thickened, hyperpigmented eczema skin on a patient's leg before treatment at Famart Healthcare.",
+  },
   { slug: "psoriasis-treatment", name: "Psoriasis Treatment", icon: "ShieldPlus", desc: "Evidence-based control of plaques, flares and scalp psoriasis." },
   { slug: "skin-allergy-treatment", name: "Skin Allergy Treatment", icon: "AlertCircle", desc: "Identify triggers and calm hives, contact dermatitis and reactions." },
   { slug: "fungal-skin-infections", name: "Fungal Skin Infections", icon: "Bug", desc: "Accurate diagnosis and treatment of ringworm, tinea and yeast infections." },
@@ -96,12 +118,18 @@ export const services = [
   { slug: "dark-spots-treatment", name: "Dark Spots Treatment", icon: "CircleDot", desc: "Fade dark spots, post-acne marks and uneven patches with medical-grade care." },
   { slug: "genital-wart-treatment", name: "Genital Warts Treatment", icon: "ShieldCheck", desc: "Discreet, confidential treatment of genital and common warts." },
   { slug: "herpes-treatment", name: "Herpes Treatment", icon: "Shield", desc: "Confidential management of cold sores and genital herpes outbreaks." },
-  { slug: "skin-tag-removal", name: "Skin Tag Removal", icon: "Scissors", desc: "Laser or medical removal of skin tags, quickly and safely." },
+  { slug: "skin-tag-removal", name: "Acrochordon (Skin Tag) Treatment", icon: "Scissors", desc: "Laser or medical removal of acrochordons (skin tags), quickly and safely." },
   { slug: "stretch-mark-removal", name: "Stretch Marks Treatment", icon: "Waves", desc: "Laser treatment to soften and fade stretch marks on body and abdomen." },
   { slug: "keloid-treatment", name: "Keloid & Scar Treatment", icon: "Bandage", desc: "Flatten and calm keloids and hypertrophic scars with clinical therapy." },
   { slug: "cracked-feet-treatment", name: "Cracked Feet Treatment", icon: "Footprints", desc: "Heal painful heel fissures and cracked feet with a medical foot-care plan." },
   { slug: "laser-services", name: "Laser Services", icon: "Zap", desc: "In-clinic laser treatment for skin tags, stretch marks, scars and more." },
-] as const;
+  { slug: "alopecia-treatment", name: "Alopecia Treatment", icon: "Wind", desc: "Diagnosis and medical treatment for hair loss, thinning and alopecia on the scalp and beard." },
+  { slug: "tinea-versicolor-treatment", name: "Tinea Versicolor Treatment", icon: "Bug", desc: "Clear up tinea versicolor patches and discolouration with antifungal therapy." },
+  { slug: "pityriasis-versicolor-treatment", name: "Pityriasis Versicolor Treatment", icon: "Palette", desc: "Medical care for pityriasis versicolor yeast patches and their recurrence." },
+  { slug: "tattoo-laser-removal", name: "Tattoo Laser Removal", icon: "Sparkle", desc: "Laser tattoo removal that safely breaks down ink on all skin tones." },
+  { slug: "dermatosis-papulosa-nigra-treatment", name: "Dermatosis Papulosa Nigra Treatment", icon: "Dot", desc: "Gentle removal of DPN bumps on the cheeks, forehead and neck for smoother skin." },
+  { slug: "nail-fungus-treatment", name: "Nail Fungus (Onychomycosis) Treatment", icon: "Hand", desc: "Treat thick, discoloured and crumbling nails with proven antifungal therapy." },
+];
 
 export const whyChooseUs = [
   { icon: "Award", title: "Experienced Professionals", desc: "A clinical team with deep experience in skin health." },
@@ -134,6 +162,8 @@ export const faqs = [
 export type ServiceDetail = {
   headline: string;
   intro: string;
+  /** Search-engine and social preview description (roughly 150–160 characters). */
+  metaDescription?: string;
   benefits: readonly string[];
   faqs: readonly { q: string; a: string }[];
 };
@@ -144,6 +174,8 @@ const cta = (name: string) =>
 export const serviceDetails: Record<string, ServiceDetail> = {
   "dark-spots-treatment": {
     headline: "Dark Spots and Hyperpigmentation Treatment in Nairobi",
+    metaDescription:
+      "Dark spot and hyperpigmentation treatment in Nairobi Pipeline. Fade post-acne marks, melasma and uneven tone safely with medical-grade dermatology care.",
     intro:
       "Dark spots from acne, insect bites, shaving or sun exposure can take years to fade on their own. Our dermatological skin care clinic in Nairobi Pipeline assesses what caused the pigmentation and builds a safe fading plan that protects your natural skin tone.",
     benefits: [
@@ -160,6 +192,8 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "genital-wart-treatment": {
     headline: "Warts and Genital Warts Treatment in Nairobi",
+    metaDescription:
+      "Confidential genital warts and wart treatment in Nairobi Pipeline. Safe laser and medical removal of common, plantar and genital warts by skin specialists.",
     intro:
       "Warts are caused by a virus and spread easily if left untreated. We remove common, plantar and genital warts using laser or medical treatment, in a private, judgement-free consultation at our Nairobi Pipeline clinic.",
     benefits: [
@@ -176,6 +210,8 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "herpes-treatment": {
     headline: "Herpes Treatment in Nairobi",
+    metaDescription:
+      "Confidential herpes treatment in Nairobi Pipeline for cold sores and genital herpes. Fast relief, outbreak control and suppressive therapy from skin specialists.",
     intro:
       "Cold sores and genital herpes are common and very treatable. Our clinicians confirm the diagnosis, settle the current outbreak quickly and set up a plan that reduces how often outbreaks return.",
     benefits: [
@@ -191,9 +227,11 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     ],
   },
   "skin-tag-removal": {
-    headline: "Skin Tag Removal in Nairobi (Laser or Medical)",
+    headline: "Acrochordon (Skin Tag) Removal in Nairobi",
+    metaDescription:
+      "Acrochordon (skin tag) removal in Nairobi Pipeline. Quick, safe laser or medical treatment for skin tags on the neck, underarms, eyelids and body.",
     intro:
-      "Skin tags on the neck, underarms, eyelids and body are harmless but often uncomfortable or unwanted. We remove them in-clinic using laser or medical treatment, with minimal downtime and careful attention to scarring.",
+      "Acrochordons — commonly called skin tags — on the neck, underarms, eyelids and body are harmless but often uncomfortable or unwanted. We remove them in-clinic using laser or medical treatment, with minimal downtime and careful attention to scarring.",
     benefits: [
       "Laser and medical skin tag removal",
       "Safe removal around the neck, underarms and eyelids",
@@ -224,6 +262,8 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "keloid-treatment": {
     headline: "Keloid and Hypertrophic Scar Treatment in Nairobi",
+    metaDescription:
+      "Keloid and hypertrophic scar treatment in Nairobi Pipeline. Flatten, soften and calm raised, itchy scars and prevent new keloids from forming.",
     intro:
       "Keloids and raised hypertrophic scars can be itchy, painful and distressing. We flatten and soften them using clinical therapy tailored to the scar's age, size and location, and help prevent new keloids from forming.",
     benefits: [
@@ -304,6 +344,8 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "psoriasis-treatment": {
     headline: "Psoriasis Treatment in Nairobi",
+    metaDescription:
+      "Psoriasis treatment in Nairobi Pipeline for the skin, scalp and nails. Evidence-based therapy to reduce plaques, control flares and keep psoriasis in remission.",
     intro:
       "Psoriasis affects the skin, scalp and confidence. We use evidence-based therapy to reduce plaques and scaling, control flares and keep the condition in remission for as long as possible.",
     benefits: [
@@ -510,6 +552,114 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       { q: "Can I book follow-up on WhatsApp?", a: "Yes, send us a message and we will confirm your review slot." },
     ],
   },
+  "alopecia-treatment": {
+    headline: "Alopecia (Hair Loss) Treatment in Nairobi",
+    metaDescription:
+      "Alopecia and hair loss treatment in Nairobi Pipeline. Diagnosis of alopecia areata, androgenetic and traction hair loss with targeted therapy to regrow hair.",
+    intro:
+      "Alopecia causes patchy or widespread hair loss on the scalp, beard and body. We identify the type — from androgenetic and alopecia areata to traction and telogen effluvium — then start targeted treatment to slow shedding, calm inflammation and support regrowth.",
+    benefits: [
+      "Diagnosis of the type and cause of your hair loss",
+      "Treatment for patches, thinning and active shedding",
+      "Scalp, beard and edge (traction) alopecia care",
+      "A regrowth and follow-up plan with realistic expectations",
+    ],
+    faqs: [
+      { q: "Will my hair grow back?", a: "Many types of alopecia improve with treatment, especially when addressed early. We give you a realistic outlook after examining your scalp." },
+      { q: "Is alopecia contagious?", a: "No. Alopecia is not infectious and cannot be passed to anyone else." },
+      { q: "How long before I see results?", a: "Shedding usually slows within weeks, while visible regrowth typically takes three to six months of consistent treatment." },
+    ],
+  },
+  "tinea-versicolor-treatment": {
+    headline: "Tinea Versicolor Treatment in Nairobi",
+    metaDescription:
+      "Tinea versicolor treatment in Nairobi Pipeline. Clear fungal patches on the chest, back and neck with antifungal therapy and stop the infection returning.",
+    intro:
+      "Tinea versicolor is a common yeast overgrowth that leaves lighter or darker patches on the chest, back and neck. We confirm the diagnosis, clear the active infection with antifungal treatment and advise on how to reduce recurrence, especially in warm, humid weather.",
+    benefits: [
+      "Confirm tinea versicolor and rule out other causes",
+      "Antifungal treatment for active patches",
+      "Advice to reduce recurring flare-ups",
+      "Follow-up to confirm the infection has cleared",
+    ],
+    faqs: [
+      { q: "Why do the patches change colour?", a: "The yeast affects pigment production, so affected skin may look lighter or darker than the rest. Colour usually evens out as the skin renews." },
+      { q: "Is tinea versicolor contagious?", a: "It is not spread person to person, but the yeast lives naturally on skin and overgrows in warm, moist conditions." },
+      { q: "How long does clearing take?", a: "The infection usually clears within two to four weeks of treatment, and skin tone then evens over the following months." },
+    ],
+  },
+  "pityriasis-versicolor-treatment": {
+    headline: "Pityriasis Versicolor Treatment in Nairobi",
+    metaDescription:
+      "Pityriasis versicolor treatment in Nairobi Pipeline. Medical care for scaly yeast patches and discolouration, with a plan to prevent recurrence.",
+    intro:
+      "Pityriasis versicolor — also called tinea versicolor — is a yeast-related rash that causes scaly, discoloured patches on oily parts of the body. Our clinicians treat the active infection, settle the scaling and help you keep it from recurring.",
+    benefits: [
+      "Accurate diagnosis of pityriasis versicolor",
+      "Antifungal therapy for scaling and patches",
+      "Care for sensitive and dark skin tones",
+      "Prevention plan for recurring episodes",
+    ],
+    faqs: [
+      { q: "Is pityriasis versicolor the same as tinea versicolor?", a: "Yes — both names describe the same yeast-related skin condition. Only the terminology differs." },
+      { q: "Will the pale patches go away?", a: "The scaly rash clears quickly with treatment, and the colour difference fades over weeks to months as pigment returns." },
+      { q: "Can it come back?", a: "The yeast can overgrow again, especially in heat and humidity, so we give you a simple prevention routine." },
+    ],
+  },
+  "tattoo-laser-removal": {
+    headline: "Tattoo Laser Removal in Nairobi",
+    metaDescription:
+      "Laser tattoo removal in Nairobi Pipeline. Safe, gradual fading of unwanted tattoos on dark and light skin with a personalised treatment plan.",
+    intro:
+      "Laser tattoo removal breaks down tattoo ink into tiny particles your body clears naturally over time. We assess the ink colours, depth and your skin type, then plan a safe course of sessions that gives you the cleanest possible result with minimal scarring.",
+    benefits: [
+      "Laser removal for black, coloured and layered tattoos",
+      "Settings matched to your skin tone",
+      "A realistic session plan and progress review",
+      "Aftercare that protects the skin and limits scarring",
+    ],
+    faqs: [
+      { q: "How many sessions will I need?", a: "Most tattoos need several sessions spaced weeks apart; amateur tattoos and black ink respond fastest, and we confirm the number after assessing your tattoo." },
+      { q: "Does it leave a scar?", a: "When performed correctly with the right settings, laser tattoo removal usually leaves little to no scarring." },
+      { q: "Is it safe on African skin?", a: "Yes, provided the laser settings and aftercare are matched to your skin type — which is central to our assessment." },
+    ],
+  },
+  "dermatosis-papulosa-nigra-treatment": {
+    headline: "Dermatosis Papulosa Nigra (DPN) Treatment in Nairobi",
+    metaDescription:
+      "Dermatosis papulosa nigra treatment in Nairobi Pipeline. Safe, gentle removal of dark DPN bumps on the face and neck for smoother skin without harsh scarring.",
+    intro:
+      "Dermatosis papulosa nigra causes small, dark, raised bumps on the cheeks, forehead, nose and neck, most often in people with darker skin. They are harmless, but many patients want them removed for smoother, clearer skin. We remove them gently with minimal downtime.",
+    benefits: [
+      "Gentle removal of DPN bumps on face and neck",
+      "Safe techniques for melanin-rich skin",
+      "Minimal downtime and careful aftercare",
+      "Advice on reducing new bumps forming",
+    ],
+    faqs: [
+      { q: "Are DPN bumps dangerous?", a: "No — dermatosis papulosa nigra is harmless and not cancerous. Removal is usually for cosmetic reasons." },
+      { q: "Can they come back?", a: "New bumps can form over time, but the treated ones are removed. We will show you how to care for your skin afterwards." },
+      { q: "Will removal leave dark marks?", a: "With the right approach for darker skin, healing is usually good. We give aftercare that reduces the risk of marks." },
+    ],
+  },
+  "nail-fungus-treatment": {
+    headline: "Nail Fungus (Onychomycosis) Treatment in Nairobi",
+    metaDescription:
+      "Nail fungus (onychomycosis) treatment in Nairobi Pipeline. Medical therapy for thick, discoloured and crumbling toenails and fingernails, with follow-up care.",
+    intro:
+      "Onychomycosis makes nails thick, yellow, brittle and sometimes painful. The infection lives under the nail, so it rarely clears with nail polish or home remedies. We confirm it, start proven antifungal treatment and monitor your nails as they grow back healthy.",
+    benefits: [
+      "Diagnosis of fungal, traumatic and psoriasis nail changes",
+      "Proven oral and topical antifungal treatment",
+      "Care for thickened, painful or crumbling nails",
+      "Follow-up until healthy nail grows back",
+    ],
+    faqs: [
+      { q: "How long does nail fungus take to clear?", a: "Because nails grow slowly, toenails can take nine to twelve months and fingernails about six months. We review progress along the way." },
+      { q: "Is nail fungus contagious?", a: "Yes. It spreads through shared floors, shoes and towels, so we advise on protecting your household and preventing reinfection." },
+      { q: "Will my nail grow back normally?", a: "In most cases, healthy nail grows back with correct treatment. Severely damaged nails may take longer and need continued review." },
+    ],
+  },
 };
 
 export const serviceCta = cta;
@@ -524,9 +674,15 @@ export const conditionsTreated = [
   { name: "Dark spots", slug: "dark-spots-treatment" },
   { name: "Warts including genital warts", slug: "genital-wart-treatment" },
   { name: "Herpes", slug: "herpes-treatment" },
-  { name: "Skin tags (laser or medical treatment)", slug: "skin-tag-removal" },
+  { name: "Skin tags / acrochordons (laser or medical treatment)", slug: "skin-tag-removal" },
   { name: "Stretch marks (laser treatment)", slug: "stretch-mark-removal" },
   { name: "Keloids and hypertrophic scars", slug: "keloid-treatment" },
   { name: "Cracked feet", slug: "cracked-feet-treatment" },
   { name: "Laser services", slug: "laser-services" },
+  { name: "Alopecia (hair loss)", slug: "alopecia-treatment" },
+  { name: "Tinea versicolor", slug: "tinea-versicolor-treatment" },
+  { name: "Pityriasis versicolor", slug: "pityriasis-versicolor-treatment" },
+  { name: "Tattoo laser removal", slug: "tattoo-laser-removal" },
+  { name: "Dermatosis papulosa nigra (DPN)", slug: "dermatosis-papulosa-nigra-treatment" },
+  { name: "Nail fungus (onychomycosis)", slug: "nail-fungus-treatment" },
 ] as const;

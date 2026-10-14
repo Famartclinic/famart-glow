@@ -10,7 +10,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { cn } from "@/lib/utils";
+import { useServiceImage } from "@/lib/service-images";
 import { faqs, services, testimonials, whyChooseUs } from "@/lib/site";
+import type { Service } from "@/lib/site";
 
 export function SectionHeading({
   eyebrow,
@@ -36,29 +39,107 @@ export function SectionHeading({
   );
 }
 
+export function ServiceMedia({
+  service,
+  className,
+  badge = "md",
+}: {
+  service: Service;
+  className?: string;
+  badge?: "md" | "lg" | false;
+}) {
+  const uploaded = useServiceImage(service.slug);
+  const src = uploaded ?? service.image;
+  const alt = service.imageAlt ?? service.name;
+
+  return (
+    <div
+      className={cn(
+        "relative overflow-hidden bg-gradient-to-br from-accent via-soft-blue/70 to-accent",
+        className,
+      )}
+    >
+      {src ? (
+        <>
+          {/* Photo fills the holder edge-to-edge with no overlay pattern. */}
+          <img
+            src={src}
+            alt={alt}
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+          />
+          <span
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-t from-black/25 via-black/[0.03] to-transparent"
+          />
+        </>
+      ) : (
+        <>
+          <span
+            aria-hidden="true"
+            className="absolute inset-0 opacity-60 [background-image:radial-gradient(circle_at_1px_1px,white_2px,transparent_0)] [background-size:18px_18px]"
+          />
+          <span className="absolute -top-12 -right-8 size-44 rounded-full bg-white/80 blur-2xl" />
+          <span className="absolute -bottom-16 -left-10 size-40 rounded-full bg-primary/10 blur-2xl" />
+          <span
+            className={cn(
+              "absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-primary/15 bg-white/70 shadow-soft backdrop-blur-sm",
+              badge === "lg" ? "size-32" : "size-28",
+            )}
+          >
+            <Icon
+              name={service.icon}
+              strokeWidth={1.5}
+              className={cn("text-primary/70", badge === "lg" ? "size-12" : "size-10")}
+            />
+          </span>
+        </>
+      )}
+
+      {src && badge !== false && (
+        <span
+          className={cn(
+            "absolute bottom-4 left-5 inline-flex items-center justify-center rounded-2xl bg-card/95 text-primary shadow-soft backdrop-blur-sm transition-colors duration-300 group-hover:gradient-brand group-hover:text-primary-foreground",
+            badge === "lg" ? "size-14" : "size-11",
+          )}
+        >
+          <Icon name={service.icon} className={badge === "lg" ? "size-6" : "size-5"} />
+        </span>
+      )}
+    </div>
+  );
+}
+
+export function ServiceCard({ service }: { service: Service }) {
+  return (
+    <article
+      id={service.slug}
+      className="group flex h-full scroll-mt-28 flex-col overflow-hidden rounded-3xl border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-lift"
+    >
+      <ServiceMedia service={service} className="aspect-[4/3]" />
+      <div className="flex flex-1 flex-col p-7 pt-6">
+        <h3 className="font-display text-lg font-semibold">{service.name}</h3>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{service.desc}</p>
+        <Link
+          to="/services/$slug"
+          params={{ slug: service.slug }}
+          className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5"
+        >
+          Learn More <span aria-hidden="true">→</span>
+        </Link>
+      </div>
+    </article>
+  );
+}
+
 export function ServicesGrid({ limit }: { limit?: number }) {
   const list = limit ? services.slice(0, limit) : services;
   return (
     <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {list.map((s, i) => (
         <Reveal as="li" key={s.slug} delay={(i % 3) * 90}>
-          <article
-            id={s.slug}
-            className="group flex h-full scroll-mt-28 flex-col rounded-3xl border bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-lift"
-          >
-            <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-primary transition-colors group-hover:gradient-brand group-hover:text-primary-foreground">
-              <Icon name={s.icon} className="size-5" />
-            </span>
-            <h3 className="mt-5 font-display text-lg font-semibold">{s.name}</h3>
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-            <Link
-              to="/services/$slug"
-              params={{ slug: s.slug }}
-              className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5"
-            >
-              Learn More <span aria-hidden="true">→</span>
-            </Link>
-          </article>
+          <ServiceCard service={s} />
         </Reveal>
       ))}
     </ul>

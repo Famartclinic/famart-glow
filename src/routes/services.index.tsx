@@ -1,10 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CtaBand, Faqs, SectionHeading, ServicesGrid } from "@/components/sections";
 import { Reveal } from "@/components/Reveal";
+import { ServiceImagesProvider } from "@/lib/service-images";
 import { services, SITE } from "@/lib/site";
 
 export const Route = createFileRoute("/services/")({
   component: Services,
+  loader: async () => {
+    try {
+      const { getServiceImages } = await import("@/lib/service-images.functions");
+      return { serviceImages: await getServiceImages() };
+    } catch {
+      return { serviceImages: {} };
+    }
+  },
   head: () => ({
     meta: [
       { title: "Dermatology Services in Nairobi | Acne, Eczema & Skin Care | Famart" },
@@ -24,7 +33,7 @@ export const Route = createFileRoute("/services/")({
       { name: "twitter:title", content: "Dermatology Services in Nairobi | Famart Healthcare" },
       {
         name: "twitter:description",
-        content: "15 dermatology and skin care services offered in Nairobi Pipeline.",
+        content: `${services.length} dermatology and skin care services offered in Nairobi Pipeline.`,
       },
     ],
     links: [{ rel: "canonical", href: "/services" }],
@@ -42,6 +51,7 @@ export const Route = createFileRoute("/services/")({
               "@type": "MedicalProcedure",
               name: s.name,
               description: s.desc,
+              ...(s.image ? { image: s.image } : {}),
               provider: { "@type": "MedicalClinic", name: SITE.name },
             },
           })),
@@ -52,8 +62,10 @@ export const Route = createFileRoute("/services/")({
 });
 
 function Services() {
+  const { serviceImages } = Route.useLoaderData();
   return (
-    <>
+    <ServiceImagesProvider images={serviceImages}>
+      <>
       <section className="gradient-soft">
         <div className="mx-auto max-w-7xl px-5 py-16 lg:py-24">
           <Reveal className="max-w-3xl">
@@ -64,7 +76,7 @@ function Services() {
               Dermatology and skin care services in Nairobi
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Fifteen focused services covering medical dermatology, cosmetic skin care and ongoing
+              Focused services covering medical dermatology, cosmetic skin care and ongoing
               follow-up — all delivered from our Nairobi Pipeline clinic.
             </p>
           </Reveal>
@@ -91,6 +103,7 @@ function Services() {
       <section className="mx-auto max-w-7xl px-5 py-20">
         <CtaBand />
       </section>
-    </>
+      </>
+    </ServiceImagesProvider>
   );
 }

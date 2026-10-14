@@ -15,9 +15,18 @@ import {
   WhyChooseUs,
 } from "@/components/sections";
 import { conditionsTreated, faqs, SITE, telLink } from "@/lib/site";
+import { ServiceImagesProvider } from "@/lib/service-images";
 
 export const Route = createFileRoute("/")({
   component: Home,
+  loader: async () => {
+    try {
+      const { getServiceImages } = await import("@/lib/service-images.functions");
+      return { serviceImages: await getServiceImages() };
+    } catch {
+      return { serviceImages: {} };
+    }
+  },
   head: () => ({
     meta: [
       { title: "Famart Healthcare Medical & Skin Clinic | Dermatology Clinic in Nairobi" },
@@ -76,8 +85,10 @@ const badges = [
 ];
 
 function Home() {
+  const { serviceImages } = Route.useLoaderData();
   return (
-    <>
+    <ServiceImagesProvider images={serviceImages}>
+      <>
       <section className="relative overflow-hidden gradient-soft">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-2 lg:py-24">
           <Reveal className="reveal-in">
@@ -261,6 +272,7 @@ function Home() {
       <section className="mx-auto max-w-7xl px-5 pb-24">
         <CtaBand />
       </section>
-    </>
+      </>
+    </ServiceImagesProvider>
   );
 }
