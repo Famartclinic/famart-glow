@@ -246,6 +246,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "stretch-mark-removal": {
     headline: "Stretch Marks Laser Treatment in Nairobi",
+    metaDescription: "Stretch mark laser treatment in Nairobi Pipeline. Soften and fade stretch marks on the abdomen, thighs and arms with safe, medically guided laser sessions.",
     intro:
       "Stretch marks on the abdomen, thighs, hips and arms respond well to laser treatment. We assess how old and how deep the marks are, then use laser therapy to improve their colour and texture over a course of sessions.",
     benefits: [
@@ -280,6 +281,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "cracked-feet-treatment": {
     headline: "Cracked Feet and Heel Fissure Treatment in Nairobi",
+    metaDescription: "Cracked feet and heel fissure treatment in Nairobi Pipeline. Heal painful cracks, treat the underlying cause and protect your feet with a medical foot-care plan.",
     intro:
       "Cracked heels are more than a cosmetic problem — deep fissures are painful and can become infected. We treat the cracks, identify the underlying cause such as fungal infection, eczema or diabetes-related dryness, and put a foot-care routine in place.",
     benefits: [
@@ -296,6 +298,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "laser-services": {
     headline: "Laser Skin Treatment Services in Nairobi",
+    metaDescription: "Laser skin treatment in Nairobi Pipeline for skin tags, stretch marks, scars and warts. Clinically assessed sessions matched to your skin type at Famart.",
     intro:
       "Our clinic offers in-clinic laser treatment for skin tags, stretch marks, scars, warts and other skin concerns. Every laser session starts with a clinical assessment so the treatment and settings are matched to your skin type.",
     benefits: [
@@ -312,6 +315,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "acne-treatment": {
     headline: "Acne Treatment in Nairobi",
+    metaDescription: "Acne treatment in Nairobi Pipeline. Clear breakouts, control acne triggers and protect your skin from scarring with a personalised medical plan from Famart.",
     intro:
       "Acne is more than a cosmetic concern — it is a medical skin condition. At Famart Healthcare we assess the type and severity of your acne, identify the triggers behind it and build a treatment plan that clears active breakouts while protecting your skin from scarring.",
     benefits: [
@@ -328,6 +332,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "eczema-management": {
     headline: "Eczema Treatment and Management in Nairobi",
+    metaDescription: "Eczema treatment in Nairobi Pipeline. Calm itchy flares fast and keep your skin stable with a long-term maintenance plan from our dermatology team.",
     intro:
       "Eczema flares are unpredictable, itchy and exhausting. Our dermatology team focuses on calming the current flare quickly and then keeping your skin stable with a long-term maintenance routine you can actually follow.",
     benefits: [
@@ -362,6 +367,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "skin-allergy-treatment": {
     headline: "Skin Allergy Treatment in Nairobi",
+    metaDescription: "Skin allergy treatment in Nairobi Pipeline. Diagnose the trigger behind hives and contact dermatitis, calm the reaction and stop it coming back.",
     intro:
       "Hives, contact dermatitis and sudden reactions need a proper diagnosis, not guesswork. We work through your history and exposures to find the trigger, calm the reaction and prevent it happening again.",
     benefits: [
@@ -378,6 +384,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "fungal-skin-infections": {
     headline: "Fungal Skin Infection Treatment in Nairobi",
+    metaDescription: "Fungal skin infection treatment in Nairobi Pipeline. Accurate diagnosis and effective therapy for ringworm, athlete's foot, nail fungus and yeast infections.",
     intro:
       "Ringworm, athlete's foot, nail fungus and yeast infections are often self-treated with the wrong creams for months. We confirm the diagnosis and prescribe the right antifungal at the right strength and duration.",
     benefits: [
@@ -394,6 +401,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "skin-rash-diagnosis": {
     headline: "Skin Rash Diagnosis in Nairobi",
+    metaDescription: "Skin rash diagnosis in Nairobi Pipeline. Get a clear answer for an unexplained rash, plus a treatment plan you can trust, from Famart skin specialists.",
     intro:
       "An unexplained rash can be anything from a simple irritation to a sign of an internal condition. Our consultation gives you a clear diagnosis and a treatment plan instead of another guess.",
     benefits: [
@@ -410,6 +418,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "pigmentation-disorders": {
     headline: "Pigmentation and Dark Spot Treatment in Nairobi",
+    metaDescription: "Pigmentation disorder treatment in Nairobi Pipeline. Safe, dermatologist-approved care for melasma, dark patches and uneven skin tone, without harsh bleaching.",
     intro:
       "Melasma, dark patches and uneven tone respond best to medically supervised treatment. We use safe, dermatologist-approved protocols — never skin-damaging bleaching products.",
     benefits: [
@@ -426,6 +435,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "skin-consultation": {
     headline: "Dermatology Skin Consultation in Nairobi",
+    metaDescription: "Skin consultation in Nairobi Pipeline. A thorough one-on-one assessment with a qualified clinician and a written, personalised skin care plan.",
     intro:
       "A full one-on-one assessment of your skin with a qualified clinician. We listen to your concern, examine your skin properly and leave you with a written, personalised plan.",
     benefits: [
@@ -442,6 +452,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "general-dermatology": {
     headline: "General Dermatology in Nairobi",
+    metaDescription: "General dermatology in Nairobi Pipeline for adults and children. Medical care for everyday skin complaints and chronic conditions, all in one clinic.",
     intro:
       "Full-spectrum medical dermatology for adults and children — from everyday skin complaints to chronic conditions that need long-term management.",
     benefits: [
@@ -458,6 +469,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "cosmetic-skin-care": {
     headline: "Cosmetic Skin Care in Nairobi",
+    metaDescription: "Cosmetic skin care in Nairobi Pipeline. Medically guided treatments that improve glow, texture and tone without ever compromising your skin health.",
     intro:
       "Medically guided cosmetic care that improves glow, texture and tone without compromising skin health. Every treatment is chosen after a proper clinical assessment.",
     benefits: [
@@ -474,6 +486,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "hair-scalp-conditions": {
     headline: "Hair Loss and Scalp Treatment in Nairobi",
+    metaDescription: "Hair and scalp treatment in Nairobi Pipeline. Diagnose and treat hair loss, thinning edges, dandruff and scalp inflammation with a plan that works.",
     intro:
       "Hair loss, thinning edges, dandruff and scalp inflammation all have treatable causes. We diagnose the cause first, then treat it — including traction alopecia from styling.",
     benefits: [
@@ -490,6 +503,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "mole-assessment": {
     headline: "Mole and Skin Lesion Assessment in Nairobi",
+    metaDescription: "Mole assessment in Nairobi Pipeline. Careful examination of changing moles and lesions, with clear advice on monitoring, removal or referral.",
     intro:
       "Any mole that changes in size, shape, colour or sensation deserves a professional look. We examine moles and lesions carefully and advise on monitoring, removal or referral.",
     benefits: [
@@ -506,6 +520,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "wart-removal": {
     headline: "Wart and Skin Tag Removal in Nairobi",
+    metaDescription: "Wart removal in Nairobi Pipeline. Quick, clean in-clinic removal of warts, skin tags and small benign growths, with aftercare for neat healing.",
     intro:
       "Quick, clean in-clinic removal of warts, skin tags and small benign growths, with proper aftercare so the area heals neatly.",
     benefits: [
@@ -522,6 +537,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "skin-infection-treatment": {
     headline: "Skin Infection Treatment in Nairobi",
+    metaDescription: "Skin infection treatment in Nairobi Pipeline. Prompt care for boils, cellulitis, impetigo and other bacterial or viral skin infections, with follow-up.",
     intro:
       "Boils, cellulitis, impetigo and other bacterial or viral skin infections need prompt, correct treatment. We assess severity, start therapy quickly and review healing.",
     benefits: [
@@ -538,6 +554,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   },
   "patient-follow-up": {
     headline: "Patient Follow-up Care in Nairobi",
+    metaDescription: "Patient follow-up at Famart Healthcare Nairobi Pipeline. Structured review visits that check progress, adjust your treatment and keep symptoms controlled.",
     intro:
       "Treatment works best when it is reviewed. Our structured follow-up visits check your progress, adjust your plan and keep chronic conditions under control.",
     benefits: [

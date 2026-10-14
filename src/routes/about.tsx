@@ -12,7 +12,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Learn about Famart Healthcare Medical and Skin Clinic — a Nairobi Pipeline dermatology practice built on compassionate care, evidence-based treatment and personalised skin health plans.",
+          "Learn about Famart Healthcare Medical and Skin Clinic — a Nairobi Pipeline dermatology practice offering compassionate, evidence-based skin care.",
       },
       { property: "og:title", content: "About Famart Healthcare Medical and Skin Clinic" },
       {

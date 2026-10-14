@@ -73,6 +73,14 @@ export function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                to="/services"
+                className="inline-flex items-center font-semibold text-primary transition-colors hover:underline"
+              >
+                View all services
+              </Link>
+            </li>
           </ul>
         </nav>
 
