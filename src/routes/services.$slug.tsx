@@ -35,7 +35,7 @@ export const Route = createFileRoute("/services/$slug")({
     }
     const { service, detail } = loaderData;
     const title = `${service.name} in Nairobi | Famart Healthcare Skin Clinic`;
-    const description = `${detail.intro.slice(0, 150)}`;
+    const description = detail.metaDescription ?? detail.intro.slice(0, 150);
     return {
       meta: [
         { title },

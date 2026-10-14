@@ -33,7 +33,7 @@ export const Route = createFileRoute("/services/")({
       { name: "twitter:title", content: "Dermatology Services in Nairobi | Famart Healthcare" },
       {
         name: "twitter:description",
-        content: "15 dermatology and skin care services offered in Nairobi Pipeline.",
+        content: `${services.length} dermatology and skin care services offered in Nairobi Pipeline.`,
       },
     ],
     links: [{ rel: "canonical", href: "/services" }],
@@ -76,7 +76,7 @@ function Services() {
               Dermatology and skin care services in Nairobi
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Fifteen focused services covering medical dermatology, cosmetic skin care and ongoing
+              Focused services covering medical dermatology, cosmetic skin care and ongoing
               follow-up — all delivered from our Nairobi Pipeline clinic.
             </p>
           </Reveal>
